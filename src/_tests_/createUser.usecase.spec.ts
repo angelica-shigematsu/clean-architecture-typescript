@@ -1,11 +1,14 @@
-import UserRepositoryInMemory from "../adapters/mock/UserRepositoryInMemory";
+// import UserRepositoryInMemory from "../adapters/mock/UserRepositoryInMemory";
+import UserRepositoryBD from "../adapters/mock/UserRepositoryBD";
 import UserCaseUse from "../usecase/UserCaseUse";
 
 
 describe("User", () => {
   it("should be created user", async() => {
 
-    const repository = new UserRepositoryInMemory()
+    // const repository = new UserRepositoryInMemory()
+
+    const repository = new UserRepositoryBD()
     
     const caseUse = new UserCaseUse(repository)
 
@@ -15,8 +18,8 @@ describe("User", () => {
       email: "user@example.com",
       password: "12345678"
     }
-
     const userCreated = await caseUse.create(user)
-    expect(userCreated[0]).toHaveProperty('created')
+
+    expect(userCreated).toHaveProperty('created')
   })
 })

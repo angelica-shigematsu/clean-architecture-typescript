@@ -2,18 +2,17 @@ import UserRepository from './UserRepository'
 import IUser from '../entities/User'
 import CaseUse from './CaseUse'
 
-const regExEmail = /^[^@ ,;{}\[\]$!%&*]+@[^@ \d ,;{}\[\]$!%&*]+\.[^@ \d ,;{}\[\]$!%&*]+/i
+// const regExEmail = /^[^@ ,;{}\[\]$!%&*]+@[^@ \d ,;{}\[\]$!%&*]+\.[^@ \d ,;{}\[\]$!%&*]+/i
 
-const regExHasNumber= /[\d]+/
+// const regExHasNumber= /[\d]+/
 
-export default class UserCaseUse implements CaseUse<IUser,void, null> {
+export default class UserCaseUse implements CaseUse<IUser,null> {
 
   constructor(
     private userRepository: UserRepository
   ) {}
 
-  async create(user: IUser): Promise<IUser[]> {
-
+  async create(user: IUser): Promise<IUser> {
     const date = new Date()
 
     const userExits = await this.userRepository.findByEmail(user.email)
@@ -26,21 +25,8 @@ export default class UserCaseUse implements CaseUse<IUser,void, null> {
     }
 
     return this.userRepository.add(newUser)
-
   }
 
-    
-    // if (!user) throw new Error("User do not exits")
-
-    // if (!user.name ||user.name.length < 6 || regExHasNumber.test(user.name))
-    //   throw new Error("Name invalid")
-
-    // if (!user.email || !regExEmail.test(user.email)) 
-    //   throw new Error("Email invalid")
-
-    // if (user?.password)
-    //   throw new Error("Password invalid")
-  // }
   async getUserById(userId: string): Promise<IUser | null> {
 
     const userExits = this.userRepository.findById(userId) ??  null
@@ -51,3 +37,15 @@ export default class UserCaseUse implements CaseUse<IUser,void, null> {
   }
   
 }
+
+// if (!user) throw new Error("User do not exits")
+
+    // if (!user.name ||user.name.length < 6 || regExHasNumber.test(user.name))
+    //   throw new Error("Name invalid")
+
+    // if (!user.email || !regExEmail.test(user.email)) 
+    //   throw new Error("Email invalid")
+
+    // if (user?.password)
+    //   throw new Error("Password invalid")
+  // }
