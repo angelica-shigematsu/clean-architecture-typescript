@@ -1,5 +1,5 @@
 // import UserRepositoryInMemory from "../adapters/mock/UserRepositoryInMemory";
-import UserRepositoryBD from "../adapters/mock/UserRepositoryBD";
+import UserRepositoryBD from "../infra/db/UserRepositoryBD";
 import UserCaseUse from "../usecase/UserCaseUse";
 
 
