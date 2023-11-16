@@ -1,7 +1,7 @@
 import IUser from "../../entities/User";
 import UserRepository from "../../usecase/UserRepository";
 
-import prisma from '../../infra/PrismaClient'
+import prisma from '../PrismaClient'
 
 export default class UserRepositoryBD implements UserRepository{
   // private static userRepository: IUser[] = []
