@@ -27,7 +27,7 @@ export default class UserRepositoryBD implements UserRepository{
       where: { email }
     })
 
-    if (userRepository) return null
+    if (!userRepository) return null
 
     return userRepository
     // UserRepositoryInMemory.userRepository
