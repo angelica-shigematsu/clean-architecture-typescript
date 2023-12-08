@@ -1,15 +1,18 @@
 import UserRepository from './UserRepository'
 import IUser from '../entities/User'
 import CaseUse from './CaseUse'
+import ProvedorCryptRepository from './ProvedorCryptRepository'
+import MessageError from './MessageError'
 
 // const regExEmail = /^[^@ ,;{}\[\]$!%&*]+@[^@ \d ,;{}\[\]$!%&*]+\.[^@ \d ,;{}\[\]$!%&*]+/i
 
 // const regExHasNumber= /[\d]+/
 
-export default class UserCaseUse implements CaseUse<IUser,null> {
+export default class UserCaseUse implements CaseUse<IUser, IUser | null> {
 
   constructor(
-    private userRepository: UserRepository
+    private userRepository: UserRepository,
+    private provedorCrypt: ProvedorCryptRepository
   ) {}
 
   async create(user: IUser): Promise<IUser> {
@@ -17,10 +20,14 @@ export default class UserCaseUse implements CaseUse<IUser,null> {
 
     const userExits = await this.userRepository.findByEmail(user.email)
 
-    if (userExits) throw new Error(`User already exists: ${user.email}`)
+    const passworCrypt = this.provedorCrypt.crypt(user.password)
+
+    if (userExits) throw new MessageError('', 400, `User already exists: ${user.email}`)
 
     const newUser = {
-      ...user,
+      name: user.name,
+      email: user.email,
+      password: passworCrypt,
       created: date
     }
 
