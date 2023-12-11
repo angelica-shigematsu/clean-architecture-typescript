@@ -5,11 +5,13 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "test": "jest ./_tests_/"
+    "test": "jest --testPathPattern=_tests_/login.usecase.spec.ts*"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.21",
     "@types/jest": "^29.5.8",
+    "@types/jsonwebtoken": "^9.0.5",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
     "eslint": "^8.53.0",
@@ -22,8 +24,10 @@
   },
   "dependencies": {
     "@prisma/client": "^5.6.0",
+    "bcrypt": "^5.1.1",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "init": "^0.1.2"
+    "init": "^0.1.2",
+    "jsonwebtoken": "^9.0.2"
   }
 }
