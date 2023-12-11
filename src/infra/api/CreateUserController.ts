@@ -16,7 +16,7 @@ export default class CreateUserController {
         })
         res.status(201).json("User created")
       }catch(error) {
-        res.status(400).json()
+        res.status(500).json("Internal Server Error")
       }     
     })
   }
